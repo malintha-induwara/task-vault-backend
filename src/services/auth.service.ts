@@ -118,7 +118,7 @@ export const logoutUser = async (incomingRefreshToken: string): Promise<void> =>
 
 const storeRefreshToken = async (userId: string, token: string): Promise<void> => {
   const hashedToken = await bcryptUtils.hashData(token);
-  const expires = new Date(Date.now() + parseDuration(process.env.JWT_REFRESH_EXPIRATION as string));
+  const expires = new Date(Date.now() + parseDuration(process.env.JWT_REFRESH_EXPIRATION as string) * 1000);
 
   await prisma.token.deleteMany({
     where: { userId: userId, type: TokenType.REFRESH },
