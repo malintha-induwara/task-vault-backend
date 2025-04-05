@@ -9,7 +9,7 @@ const setRefreshTokenCookie = (res: Response, refreshToken: string) => {
     httpOnly: true,
     secure: (process.env.ENVIROMENT as string) === "production",
     sameSite: "lax",
-    maxAge: parseDuration(process.env.JWT_REFRESH_EXPIRATION as string), 
+    maxAge: parseDuration(process.env.JWT_REFRESH_EXPIRATION as string) * 1000, 
   });
 };
 
